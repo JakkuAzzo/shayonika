@@ -1,641 +1,765 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>Shayonika | Photography & Video</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio of photographer and video editor, Shayonika." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="index.css">
-  <!-- AOS animation library (from MyResume vendor) -->
-  <link rel="stylesheet" href="MyResume-1.0.0/assets/vendor/aos/aos.css" />
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - MyResume Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <!-- Vendor CSS (CDN fallbacks) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File (local) -->
+  <link href="main.css" rel="stylesheet">
+  <style>
+    /* Hero typography tweaks */
+    .hero-title { font-weight:700; line-height:1.05; }
+    .hero-title .hero-role { display:block; font-weight:500; font-size:0.65em; margin-top:0.45rem; opacity:0.95; }
+    .hero-subtext { font-size:0.85rem; opacity:0.95; }
+
+    /* Floating scroll hint */
+    .floating-scroll { position:fixed; right:1.25rem; bottom:2.25rem; background:rgba(0,0,0,0.7); color:#fff; padding:0.5rem 0.9rem; border-radius:999px; font-size:0.9rem; z-index:9999; box-shadow:0 6px 18px rgba(0,0,0,0.2); animation: floatY 2.6s ease-in-out infinite; }
+    @keyframes floatY { 0%{transform:translateY(0);}50%{transform:translateY(-6px);}100%{transform:translateY(0);} }
+
+    /* About section background overlay readability */
+    #about { background-size:cover; background-position:center; background-repeat:no-repeat; }
+    #about .container { background: rgba(255,255,255,0.85); padding:1.5rem; border-radius:8px; }
+    /* Make profile image a little round */
+    .profile-img { border-radius:8px; max-width:100%; height:auto; }
+  </style>
+  <!-- =======================================================
+  * Template Name: MyResume
+  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
+  * Updated: Jun 29 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
-<body>
-  <header>
-    <nav class="nav">
-      <a href="#top" class="logo-mark">
-        <div class="logo-circle">
-          <span class="logo-initials">SY</span>
-        </div>
-        <div class="logo-text">
-          <span class="logo-name">Shayonika</span>
-          <span class="logo-tag">Photography &amp; Video</span>
-        </div>
-      </a>
 
-      <div class="nav-links" id="navLinks">
-        <a href="#portfolio">Portfolio</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </div>
+<body class="index-page">
 
-      <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-        <span>Book a Project</span>
-        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <path d="M4 10H15M10 5L15 10L10 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </button>
+  <header id="header" class="header d-flex flex-column justify-content-center">
 
-      <button class="nav-burger" id="navBurger" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-      </button>
+  <i class="header-toggle bi bi-list"></i>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i><span>Home</span></a></li>
+        <li><a href="#about"><i class="bi bi-person navicon"></i><span>About</span></a></li>
+        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i><span>Resume</span></a></li>
+        <li><a href="#portfolio"><i class="bi bi-images navicon"></i><span>Portfolio</span></a></li>
+        <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i><span>Services</span></a></li>
+        <li><a href="#contact"><i class="bi bi-envelope navicon"></i><span>Contact</span></a></li>
+      </ul>
     </nav>
+
   </header>
 
-  <main id="top">
-    <!-- HERO -->
-  <section class="hero" data-aos="fade-up" data-aos-delay="80">
-      <div class="hero-left reveal">
-        <div class="eyebrow">
-          <span class="eyebrow-dot"></span>
-          Visual stories for real people
-        </div>
-        <h1 class="hero-title">
-          Cinematic <span class="hero-highlight">frames</span>,
-          honest <span class="hero-highlight">moments</span>.
-        </h1>
-        <p class="hero-subtitle">
-          <strong>Shayonika</strong> is a London-based photographer and video editor crafting
-          stills and motion that feel like they’re pulled from your favourite film:
-          intimate portraits, bold colour, and storytelling that lives beyond the scroll.
-        </p>
+  <main class="main">
 
-        <div class="hero-pills">
-          <span class="pill"><span class="pill-dot"></span> Portrait &amp; Lifestyle</span>
-          <span class="pill"><span class="pill-dot"></span> Editorial &amp; Events</span>
-          <span class="pill"><span class="pill-dot"></span> Short-form Video</span>
-        </div>
+    <!-- Hero Section -->
+    <section id="hero" class="hero section light-background">
 
-        <div class="hero-buttons">
-          <button class="btn-primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">
-            View Selected Work
-          </button>
-          <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-            Request Availability
-          </button>
-        </div>
+      <img src="Assets/Images/Perfume advert/hero-poster.jpg" alt="Hero background" onerror="this.style.display='none'">
 
-        <p class="hero-caption">
-          Currently accepting <span>portrait, brand, music &amp; event</span> commissions.
-        </p>
-      </div>
+      <div class="container" data-aos="zoom-out">
+        <div class="row justify-content-center">
+          <div class="col-lg-9 text-center">
+            <h2 class="hero-title">Hi, I’m Shayonika <span class="hero-role">- a Creative Marketing Designer &amp; Strategic Communicator</span></h2>
+            <p class="hero-lead">I help brands stand out through bold visuals, engaging stories, and measurable strategy. With experience in journalism, public relations, and digital marketing, I bring creativity and structure to every campaign I craft.</p>
 
-      <div class="hero-visual reveal">
-        <div class="hero-orbit">
-          <div class="orbit-inner">
-            <div class="orbit-header">
-              <span>Featured reel</span>
-              <div class="orbit-badge">
-                <span class="orbit-badge-dot"></span>
-                <span>2025 Showreel</span>
-              </div>
+            <p class="hero-subtext">Social Media Strategy • Branding • Design • Illustration • Video Production • Content Management</p>
+
+            <div class="hero-ctas">
+              <a class="btn btn-outline-light" href="#contact">Contact Me</a>
             </div>
 
-            <div class="featured-frame">
-              <!-- TODO: Replace src with a public video URL from her Drive or another host -->
-              <video class="featured-media" muted autoplay loop playsinline>
-                <source src="https://videos.pexels.com/video-files/6898859/6898859-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-              </video>
-              <div class="featured-overlay">
-                <span class="featured-label">Selected projects</span>
-                <div class="featured-title">Faces of the City · Portrait series</div>
-                <div class="featured-meta">
-                  <span>Shot &amp; edited by Shayonika</span>
-                  <span class="chip">Colour-driven visual story</span>
+            <div class="social-links mt-3">
+              <a href="https://www.instagram.com/_vodkanic._/" target="_blank" rel="noreferrer"><i class="bi bi-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/shayonika-behera-58839427a" target="_blank" rel="noreferrer"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- Floating scroll hint -->
+    <div class="floating-scroll">scroll to see my work</div>
+
+    <!-- About Section -->
+  <section id="about" class="about section" style="background-image:url('Assets/Images/Shayonika Photos/IMG_3171.JPG');">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About</h2>
+        <p>I’m a multidisciplinary creative passionate about connecting people and ideas through design and storytelling.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-4">
+            <img src="Assets/Images/Logo Competition Award/profile-photo.jpg" onerror="this.onerror=null;this.src='Assets/Images/Shayonika Photos/IMG_3173.JPG'" class="img-fluid profile-img" alt="Shayonika Behera">
+          </div>
+          <div class="col-lg-8 content">
+            <h2>About</h2>
+            <p>I’m a multidisciplinary creative passionate about connecting people and ideas through design and storytelling.</p>
+
+            <p>With a background in journalism and public relations, I’ve built a strong foundation in social media strategy, client management, and visual storytelling. As an Operational Executive at Bold Marketing, I manage client relations, oversee content pipelines, and help brands express their values through authentic, well-crafted digital communication.</p>
+
+            <p>Currently, I’m pursuing my M.A. in Media and Communication at Kingston University, where I’m expanding my expertise in content strategy, analytics, and research — bridging creative ideas with measurable impact.</p>
+
+            <h4>Highlights</h4>
+            <ul>
+              <li>🏆 Winner of a National Logo Design Competition</li>
+              <li>💼 Operational Executive, Bold Marketing (Client Relations &amp; Content Management)</li>
+              <li>🎥 Directed and piloted drone shoots for a perfume brand campaign</li>
+              <li>🌸 Designed and marketed visuals for Dream Dew Perfume</li>
+              <li>🏡 Created luxury branding for Posh Living Homes</li>
+            </ul>
+
+            <blockquote>“Creativity isn’t just what you make — it’s how you make people feel.”</blockquote>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-emoji-smile"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Happy Clients</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-journal-richtext"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Projects</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        <!-- Only two stats retained per request -->
+          <div class="col-lg-6 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-emoji-smile"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Happy Clients</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-6 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-journal-richtext"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Projects</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Stats Section -->
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>🧠 Skills</h2>
+        <p>Core strengths and technical proficiency.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row">
+          <div class="col-lg-6">
+            <h4>Core Strengths</h4>
+            <ul>
+              <li>Strategic Communication</li>
+              <li>Social Media Management</li>
+              <li>Client Relations &amp; Campaign Coordination</li>
+              <li>Content Writing &amp; Editing</li>
+              <li>Graphic Design &amp; Visual Storytelling</li>
+              <li>Video Production (Drone &amp; Ad Filming)</li>
+              <li>Research &amp; Analytical Thinking</li>
+              <li>Public Relations &amp; Brand Management</li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <h4>Technical Skills</h4>
+            <div class="mb-2">HTML — 100%</div>
+            <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
+
+            <div class="mb-2">CSS — 90%</div>
+            <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width:90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div></div>
+
+            <div class="mb-2">JavaScript — 75%</div>
+            <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>
+
+            <div class="mb-2">Canva — 95%</div>
+            <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width:95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div></div>
+
+            <div class="mb-2">Adobe Photoshop — 80%</div>
+            <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width:80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div></div>
+
+            <div class="mb-2">Adobe Illustrator — 75%</div>
+            <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>
+
+            <div class="mb-2">Adobe Premiere Pro — 70%</div>
+            <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width:70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div></div>
+
+            <div class="mb-2">DaVinci Resolve — 65%</div>
+            <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width:65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div></div>
+
+            <div class="mb-2">WordPress / CMS — 85%</div>
+            <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width:85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Skills Section -->
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Resume</h2>
+        <p>Education, professional experience and contact details.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="resume-title">Education</h3>
+
+            <div class="resume-item pb-0">
+              <h4>Master of Arts – Media and Communication (Expected 2026)</h4>
+              <p><em>Kingston University, Kingston upon Thames, United Kingdom</em></p>
+              <p>Specialising in Media Strategy, Content Analytics, and Brand Communication.</p>
+            </div>
+
+            <div class="resume-item">
+              <h4>Bachelor of Arts – Journalism and Mass Communication</h4>
+              <p><em>D.Y. Patil International University, Pune, India — GPA: 8.91</em></p>
+              <p>Specialised in Public Relations, Advertising, and Digital Media.</p>
+            </div>
+
+            <div class="resume-item">
+              <h4>Higher Secondary Certificate (HSC)</h4>
+              <p><em>SBRG Women’s College, Berhampur, Odisha — 2018 (81%)</em></p>
+            </div>
+
+            <div class="resume-item">
+              <h4>Secondary School Certificate (SSC)</h4>
+              <p><em>Navy Children School, Kochi, Kerala — 2021 (67%)</em></p>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="resume-title">Professional Experience</h3>
+
+            <div class="resume-item">
+              <h4>Operational Executive — Bold Marketing</h4>
+              <h5>Sep 2024 – Present</h5>
+              <p><em>Pune, Maharashtra, India</em></p>
+              <ul>
+                <li>Managing client relations, social media strategy, and content pipelines for multiple brand accounts.</li>
+                <li>Involved in campaign design, performance tracking, and coordination between creative and strategy teams.</li>
+                <li>Produced visuals, promotional videos, and branding assets aligned with each client’s identity.</li>
+              </ul>
+            </div>
+
+            <div class="resume-item">
+              <h4>Freelance Designer &amp; Content Creator</h4>
+              <p><em>Ongoing</em></p>
+              <ul>
+                <li>Developed logos, branding concepts, and visual media for small businesses and independent creators.</li>
+                <li>Created ad campaigns and short-form video content to support social media growth and engagement.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Resume Section -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Portfolio</h2>
+        <p>Branding, campaign work and multimedia projects — a curated selection highlighting identity, ads and video production.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <!-- Branding: Dream Dew Perfume -->
+          <div class="col-lg-4 col-md-6">
+            <img src="Assets/Images/Perfume advert/dream-dew-hero.jpg" class="img-fluid" alt="Dream Dew perfume visual" onerror="this.style.display='none'">
+            <div class="portfolio-info">
+              <h4>Dream Dew Perfume — Exotic Elegance</h4>
+              <p>Logo Design | Visual Identity | Advertising Campaign | Product Photography</p>
+              <a href="Assets/Images/Perfume advert/dream-dew-hero.jpg" title="Dream Dew — branding" data-gallery="portfolio" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+            </div>
+          </div>
+
+          <!-- Branding: Posh Living -->
+          <div class="col-lg-4 col-md-6">
+            <img src="Assets/Images/Logo Competition Award/posh-living-mockup.jpg" class="img-fluid" alt="Posh Living branding" onerror="this.style.display='none'">
+            <div class="portfolio-info">
+              <h4>Posh Living — Luxury Homes Branding</h4>
+              <p>Logo Design | Brand Concept</p>
+              <a href="Assets/Images/Logo Competition Award/posh-living-mockup.jpg" title="Posh Living — branding" data-gallery="portfolio" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+            </div>
+          </div>
+
+          <!-- Marketing Campaigns: Building Trust -->
+          <div class="col-lg-4 col-md-6">
+            <img src="Assets/Images/Logo Competition Award/building-trust-poster.jpg" class="img-fluid" alt="Building Trust campaign poster" onerror="this.style.display='none'">
+            <div class="portfolio-info">
+              <h4>Building Trust in the Digital Age</h4>
+              <p>Visual Campaign | Social Media Marketing | Event Branding</p>
+              <a href="Assets/Images/Logo Competition Award/building-trust-poster.jpg" title="Building Trust — campaign" data-gallery="portfolio" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+            </div>
+          </div>
+
+          <!-- Video & Media Production: Dream Dew Drone -->
+          <div class="col-lg-4 col-md-6">
+            <img src="Assets/Images/Perfume advert/dream-dew-drone.jpg" class="img-fluid" alt="Dream Dew drone still" onerror="this.style.display='none'">
+            <div class="portfolio-info">
+              <h4>Dream Dew Perfume Ad (Drone Video)</h4>
+              <p>Filming | Editing | Creative Direction</p>
+              <a href="Assets/Images/Perfume advert/dream-dew-drone.jpg" title="Dream Dew drone" data-gallery="portfolio" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+            </div>
+          </div>
+
+          <!-- Illustration placeholders -->
+          <div class="col-lg-4 col-md-6">
+            <img src="Assets/Images/Illustrations/illustration-1.jpg" class="img-fluid" alt="Illustration placeholder" onerror="this.style.display='none'">
+            <div class="portfolio-info">
+              <h4>Illustration &amp; Creative Work</h4>
+              <p>Digital illustrations and design experiments.</p>
+              <a href="Assets/Images/Illustrations/illustration-1.jpg" title="Illustration" data-gallery="portfolio" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="achievements section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Achievements</h2>
+        <p>A selection of awards and recognition.</p>
+      </div>
+
+      <div class="container">
+        <ul class="achievements-list">
+          <li>🥇 Winner, Logo Design Competition (National-Level Event)</li>
+          <li>🎓 Participant, Global Communication Conclave, Public Relations Council of India</li>
+          <li>💼 Operational Executive, Bold Marketing (2024–2025)</li>
+          <li>🌟 Creative Lead for Dream Dew Perfume Product Launch</li>
+        </ul>
+
+        <div class="testimonial">
+          <p>“She brings fresh energy to every campaign and can turn abstract ideas into polished visuals.” — Supervisor, Bold Marketing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Services</h2>
+        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item item-cyan position-relative">
+              <div class="icon">
+                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174"></path>
+                </svg>
+                <i class="bi bi-activity"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Nesciunt Mete</h3>
+              </a>
+              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item item-orange position-relative">
+              <div class="icon">
+                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426"></path>
+                </svg>
+                <i class="bi bi-broadcast"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Eosle Commodi</h3>
+              </a>
+              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item item-teal position-relative">
+              <div class="icon">
+                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,541.5067337569781C382.14930387511276,545.0595476570109,479.8736841581634,548.3450877840088,526.4010558755058,480.5488172755941C571.5218469581645,414.80211281144784,517.5187510058486,332.0715597781072,496.52539010469104,255.14436215662573C477.37192572678356,184.95920475031193,473.57363656557914,105.61284051026155,413.0603344069578,65.22779650032875C343.27470386102294,18.654635553484475,251.2091493199835,5.337323636656869,175.0934190732945,40.62881213300186C97.87086631185822,76.43348514350839,51.98124368387456,156.15599469081315,36.44837278890362,239.84606092416172C21.716077023791087,319.22268207091537,43.775223500013084,401.1760424656574,96.891909868211,461.97329694683043C147.22146801428983,519.5804099606455,223.5754009179313,538.201503339737,300,541.5067337569781"></path>
+                </svg>
+                <i class="bi bi-easel"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Ledo Markt</h3>
+              </a>
+              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item item-red position-relative">
+              <div class="icon">
+                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"></path>
+                </svg>
+                <i class="bi bi-bounding-box-circles"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Asperiores Commodit</h3>
+              </a>
+              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
+              <a href="#" class="stretched-link"></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item item-indigo position-relative">
+              <div class="icon">
+                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,532.3542879108572C369.38199826031484,532.3153073249985,429.10787420159085,491.63046689027357,474.5244479745417,439.17860296908856C522.8885846962883,383.3225815378663,569.1668002868075,314.3205725914397,550.7432151929288,242.7694973846089C532.6665558377875,172.5657663291529,456.2379748765914,142.6223662098291,390.3689995646985,112.34683881706744C326.66090330228417,83.06452184765237,258.84405631176094,53.51806209861945,193.32584062364296,78.48882559362697C121.61183558270385,105.82097193414197,62.805066853699245,167.19869350419734,48.57481801355237,242.6138429142374C34.843463184063346,315.3850353017275,76.69343916112496,383.4422959591041,125.22947124332185,439.3748458443577C170.7312796277747,491.8107796887764,230.57421082200815,532.3932930995766,300,532.3542879108572"></path>
+                </svg>
+                <i class="bi bi-calendar4-week icon"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Velit Doloremque</h3>
+              </a>
+              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
+              <a href="#" class="stretched-link"></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item item-pink position-relative">
+              <div class="icon">
+                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,566.797414625762C385.7384707136149,576.1784315230908,478.7894351017131,552.8928747891023,531.9192734346935,484.94944893311C584.6109503024035,417.5663521118492,582.489472248146,322.67544863468447,553.9536738515405,242.03673114598146C529.1557734026468,171.96086150256528,465.24506316201064,127.66468636344209,395.9583748389544,100.7403814666027C334.2173773831606,76.7482773500951,269.4350130405921,84.62216499799875,207.1952322260088,107.2889140133804C132.92018162631612,134.33871894543012,41.79353780512637,160.00259165414826,22.644507872594943,236.69541883565114C3.319112789854554,314.0945973066697,72.72355303640163,379.243833228382,124.04198916343866,440.3218312028393C172.9286146004772,498.5055451809895,224.45579914871206,558.5317968840102,300,566.797414625762"></path>
+                </svg>
+                <i class="bi bi-chat-square-text"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Dolori Architecto</h3>
+              </a>
+              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
+              <a href="#" class="stretched-link"></a>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Services Section -->
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Testimonials</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="row gy-4 justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="testimonial-content">
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                      <h3>Saul Goodman</h3>
+                      <h4>Ceo &amp; Founder</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <img src="assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
+                  </div>
                 </div>
               </div>
-            </div>
+            </div><!-- End testimonial item -->
 
-            <div class="orbit-metrics">
-              <div class="metric">
-                <strong>120+</strong>
-                <span>Portraits captured</span>
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="row gy-4 justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="testimonial-content">
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                      <h3>Sara Wilsson</h3>
+                      <h4>Designer</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <img src="assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="">
+                  </div>
+                </div>
               </div>
-              <div class="metric">
-                <strong>3-8 min</strong>
-                <span>Short-form edits</span>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="row gy-4 justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="testimonial-content">
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                      <h3>Jena Karlis</h3>
+                      <h4>Store Owner</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <img src="assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="">
+                  </div>
+                </div>
               </div>
-              <div class="metric">
-                <strong>Natural</strong>
-                <span>Light &amp; candid energy</span>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="row gy-4 justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="testimonial-content">
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                      <h3>John Larson</h3>
+                      <h4>Entrepreneur</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <img src="assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="">
+                  </div>
+                </div>
               </div>
-            </div>
+            </div><!-- End testimonial item -->
+
           </div>
+          <div class="swiper-pagination"></div>
         </div>
-      </div>
-    </section>
-
-    <!-- PORTFOLIO -->
-  <section class="section reveal" id="portfolio" data-aos="fade-up" data-aos-delay="80">
-      <div class="section-header">
-        <h2 class="section-title"><span>01</span> · Portfolio</h2>
-        <p class="section-subtitle">
-          A small selection from ongoing portrait, editorial, street and event work.
-          Hover to preview; filter by focus to explore different sides of her craft.
-        </p>
-      </div>
-
-      <div class="filters">
-        <button class="filter-btn active" data-filter="all">All work</button>
-        <button class="filter-btn" data-filter="portrait">Portraits</button>
-        <button class="filter-btn" data-filter="editorial">Editorial</button>
-        <button class="filter-btn" data-filter="street">Street</button>
-        <button class="filter-btn" data-filter="event">Events</button>
-        <button class="filter-btn" data-filter="video">Video stills</button>
-      </div>
-
-      <div class="portfolio-grid">
-        <!-- TODO: Replace image src values with her real hosted image URLs -->
-        <article class="portfolio-item" data-category="portrait">
-          <img class="portfolio-thumb" src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Portrait photography sample" />
-          <span class="portfolio-tag">Portrait</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Soft light studio session</div>
-            <div class="portfolio-meta">
-              <span>Studio / colour-graded</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="portfolio-item" data-category="editorial">
-          <img class="portfolio-thumb" src="https://images.pexels.com/photos/1988681/pexels-photo-1988681.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Editorial fashion photography sample" />
-          <span class="portfolio-tag">Editorial</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Urban fashion editorial</div>
-            <div class="portfolio-meta">
-              <span>On-location / natural light</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="portfolio-item" data-category="street">
-          <img class="portfolio-thumb" src="https://images.pexels.com/photos/3727487/pexels-photo-3727487.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Street photography sample" />
-          <span class="portfolio-tag">Street</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Late-night reflections</div>
-            <div class="portfolio-meta">
-              <span>City lights / candid</span>
-              <span>2023</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="portfolio-item" data-category="event">
-          <img class="portfolio-thumb" src="https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Event photography sample" />
-          <span class="portfolio-tag">Event</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Live performance energy</div>
-            <div class="portfolio-meta">
-              <span>Music / low-light</span>
-              <span>2023</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="portfolio-item" data-category="video">
-          <img class="portfolio-thumb" src="https://images.pexels.com/photos/6898859/pexels-photo-6898859.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Video editing frame sample" />
-          <span class="portfolio-tag">Video edit</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Short film colour pass</div>
-            <div class="portfolio-meta">
-              <span>DaVinci Resolve / Premiere</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="portfolio-item" data-category="portrait">
-          <img class="portfolio-thumb" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Outdoor portrait sample" />
-          <span class="portfolio-tag">Portrait</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Golden hour portraits</div>
-            <div class="portfolio-meta">
-              <span>Outdoor / warm tones</span>
-              <span>2022</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Added images from Assets/Images/images.txt (Google Drive) -->
-        <article class="portfolio-item" data-category="editorial">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=14ehAVB5KvRRdgUXo24elCO-bAGcWS263" alt="Portfolio image 1" loading="lazy" />
-          <span class="portfolio-tag">Editorial</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 1</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="portrait">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1RmjYSX6knYw9H9OBYXVgUHcgdmakk0oU" alt="Portfolio image 2" loading="lazy" />
-          <span class="portfolio-tag">Portrait</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 2</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="street">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1dEvQT15iOyBjszcDkxfySiWqDFasiBQc" alt="Portfolio image 3" loading="lazy" />
-          <span class="portfolio-tag">Street</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 3</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="editorial">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=10-GA78xGSk4B3P0QbDjbKsb4c1r5AsqV" alt="Portfolio image 4" loading="lazy" />
-          <span class="portfolio-tag">Editorial</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 4</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="portrait">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1L59JnDZEJYlpR2scptDYZ9wdHjXz4LP6" alt="Portfolio image 5" loading="lazy" />
-          <span class="portfolio-tag">Portrait</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 5</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="event">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1-Ef1fDRTUbcSH3wf35Rmp36UqTfGCtpf" alt="Portfolio image 6" loading="lazy" />
-          <span class="portfolio-tag">Event</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 6</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="editorial">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1BGl8HxHJhEKWL8ouqyrZLNDX1VPpg_Ha" alt="Portfolio image 7" loading="lazy" />
-          <span class="portfolio-tag">Editorial</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 7</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="street">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1Co6pStw6vQ-0e-LJSzx3VwS0ocF_oy0F" alt="Portfolio image 8" loading="lazy" />
-          <span class="portfolio-tag">Street</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 8</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="portrait">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1nGWgEM4o1FEA4YLOTE9oOy2NhlrZbJsH" alt="Portfolio image 9" loading="lazy" />
-          <span class="portfolio-tag">Portrait</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 9</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="editorial">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1ZKTLBw8NeX9KgG2vE2p71s56eFlRIu_R" alt="Portfolio image 10" loading="lazy" />
-          <span class="portfolio-tag">Editorial</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 10</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="street">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1D6zrHm1fy_tPuXX54xzF9q8TAU77xGmS" alt="Portfolio image 11" loading="lazy" />
-          <span class="portfolio-tag">Street</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 11</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="event">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1pRj80CIMC1zhN2ZZkiGMqgiyAx5PhLvx" alt="Portfolio image 12" loading="lazy" />
-          <span class="portfolio-tag">Event</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 12</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="editorial">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=10BIFZl6oNRbN_0vTcxOxwpNZuhgYD7fU" alt="Portfolio image 13" loading="lazy" />
-          <span class="portfolio-tag">Editorial</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 13</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
-
-        <article class="portfolio-item" data-category="portrait">
-          <img class="portfolio-thumb" src="https://drive.google.com/uc?export=view&id=1KUY7lYkXyGNAKIPXrGgshBbf9LXior1z" alt="Portfolio image 14" loading="lazy" />
-          <span class="portfolio-tag">Portrait</span>
-          <div class="portfolio-overlay"><div class="portfolio-title">Portfolio image 14</div><div class="portfolio-meta"><span>Drive</span><span>2024</span></div></div>
-        </article>
 
       </div>
-    </section>
 
-    <!-- AWARDS -->
-  <section class="section reveal" id="awards" data-aos="fade-up" data-aos-delay="80">
-      <div class="section-header">
-        <h2 class="section-title"><span>02</span> · Awards</h2>
-        <p class="section-subtitle">
-          Selected recognitions and competition entries. Click or hover to view details.
-        </p>
-      </div>
+    </section><!-- /Testimonials Section -->
 
-      <div class="portfolio-grid">
-        <article class="portfolio-item" data-category="award">
-          <img class="portfolio-thumb" src="Logo Competition Award/Shades of Brown Minimal Aesthetic Fashion Collection Instagram Post (1).png" alt="Shades of Brown minimal aesthetic logo" />
-          <span class="portfolio-tag">Award</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Shades of Brown — Logo entry</div>
-            <div class="portfolio-meta">
-              <span>Logo competition entry</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
 
-        <article class="portfolio-item" data-category="award">
-          <img class="portfolio-thumb" src="Logo Competition Award/Untitled design.png" alt="Untitled logo design" />
-          <span class="portfolio-tag">Award</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Untitled design</div>
-            <div class="portfolio-meta">
-              <span>Competition submission</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>I’m always open to collaborating on exciting projects — whether it’s building a brand, launching a campaign, or creating visually powerful content.</p>
+      </div><!-- End Section Title -->
 
-        <article class="portfolio-item" data-category="award">
-          <img class="portfolio-thumb" src="Logo Competition Award/WhatsApp Image 2024-02-23 at 14.05.15_794f1019.jpg" alt="WhatsApp image of award logo" />
-          <span class="portfolio-tag">Award</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Competition photograph</div>
-            <div class="portfolio-meta">
-              <span>Entry image</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
+      <div class="container" data-aos="fade" data-aos-delay="100">
 
-    <!-- VIDEOS -->
-  <section class="section reveal" id="videos" data-aos="fade-up" data-aos-delay="80">
-      <div class="section-header">
-        <h2 class="section-title"><span>03</span> · Videos</h2>
-        <p class="section-subtitle">Selected films and edits. Hosted on Google Drive — click the preview to open the file in Drive.</p>
-      </div>
+        <div class="row gy-4">
 
-      <div class="portfolio-grid">
-        <article class="portfolio-item" data-category="video">
-          <div class="video-wrap">
-            <iframe class="portfolio-thumb" src="https://drive.google.com/file/d/14K0R4pcg6UaLw52A-rs7FjNNBWB1WX9B/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="Video 1"></iframe>
-          </div>
-          <span class="portfolio-tag">Video</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Film edit 1</div>
-            <div class="portfolio-meta">
-              <span>Drive hosted preview</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
+          <div class="col-lg-4">
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+              <i class="bi bi-geo-alt flex-shrink-0"></i>
+              <div>
+                <h3>Location</h3>
+                <p>Pune, Maharashtra, India</p>
+              </div>
+            </div><!-- End Info Item -->
 
-        <article class="portfolio-item" data-category="video">
-          <div class="video-wrap">
-            <iframe class="portfolio-thumb" src="https://drive.google.com/file/d/1BNwCC9AXwK8ltG9AZIM3p69A6XbEJUl1/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="Video 2"></iframe>
-          </div>
-          <span class="portfolio-tag">Video</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Film edit 2</div>
-            <div class="portfolio-meta">
-              <span>Drive hosted preview</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-mortarboard flex-shrink-0"></i>
+              <div>
+                <h3>Currently</h3>
+                <p>M.A. Media &amp; Communication, Kingston University</p>
+              </div>
+            </div><!-- End Info Item -->
 
-        <article class="portfolio-item" data-category="video">
-          <div class="video-wrap">
-            <iframe class="portfolio-thumb" src="https://drive.google.com/file/d/1imjtRCpmlniEEUEyy3sO_72vO2RQRQpq/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="Video 3"></iframe>
-          </div>
-          <span class="portfolio-tag">Video</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Film edit 3</div>
-            <div class="portfolio-meta">
-              <span>Drive hosted preview</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h3>Email</h3>
+                <p><a href="mailto:shayonikabehera@gmail.com">shayonikabehera@gmail.com</a></p>
+              </div>
+            </div><!-- End Info Item -->
 
-        <article class="portfolio-item" data-category="video">
-          <div class="video-wrap">
-            <iframe class="portfolio-thumb" src="https://drive.google.com/file/d/1flRnVzki1_WHEHg4-fxWU0LUsm-u8Eku/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="Video 4"></iframe>
-          </div>
-          <span class="portfolio-tag">Video</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Film edit 4</div>
-            <div class="portfolio-meta">
-              <span>Drive hosted preview</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="portfolio-item" data-category="video">
-          <div class="video-wrap">
-            <iframe class="portfolio-thumb" src="https://drive.google.com/file/d/1tcXIjbdkjmz7nTcgQkG6oBvVlKUevIUy/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="Video 5"></iframe>
-          </div>
-          <span class="portfolio-tag">Video</span>
-          <div class="portfolio-overlay">
-            <div class="portfolio-title">Film edit 5</div>
-            <div class="portfolio-meta">
-              <span>Drive hosted preview</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-  <section class="section reveal" id="about" data-aos="fade-up" data-aos-delay="80">
-      <div class="section-header">
-        <h2 class="section-title"><span>04</span> · About</h2>
-        <p class="section-subtitle">
-          Behind the lens: how she directs, shoots and edits projects from first message to final export.
-        </p>
-      </div>
-
-      <div class="about-grid">
-        <article class="card">
-          <div class="card-content">
-            <h3>Artist statement</h3>
-            <p>
-              Every image is a tiny universe: light, colour and expression meeting in a fraction of a second.
-              My work lives in that tension between cinematic and familiar – stylised enough to feel intentional,
-              honest enough to feel like you.
-            </p>
-
-            <div class="two-col-text">
-              <p>
-                From first moodboard to final export, I build spaces where people forget the camera. That’s when
-                the good stuff happens: the almost-laugh, the unposed glance, the movement in-between beats.
-              </p>
-              <p>
-                Whether it’s an intimate portrait session, a chaotic live show, or a brand campaign, my priority
-                is always the same – tell the most truthful version of your story, with visuals bold enough to
-                cut through the noise.
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-content">
-            <h3>Tools &amp; workflow</h3>
-            <p>
-              Shooting on digital mirrorless systems, grading with a film-inspired palette, and cutting in modern
-              editing suites – built for social, streaming and large-format prints.
-            </p>
-            <div class="skills-list">
-              <span class="skill-badge">Adobe Lightroom / Photoshop</span>
-              <span class="skill-badge">Premiere Pro / DaVinci Resolve</span>
-              <span class="skill-badge">Studio &amp; natural light</span>
-              <span class="skill-badge">Portrait &amp; lifestyle</span>
-              <span class="skill-badge">Music &amp; events</span>
-              <span class="skill-badge">Short-form social edits</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="section reveal" id="services">
-      <div class="section-header">
-        <h2 class="section-title"><span>03</span> · Services</h2>
-        <p class="section-subtitle">
-          Flexible shoots and edits for people, brands and artists – built around real timelines and real budgets.
-        </p>
-      </div>
-
-      <div class="services-grid">
-        <article class="service-card">
-          <h4>Portrait &amp; lifestyle</h4>
-          <span class="service-pill">For people &amp; creatives</span>
-          <p>
-            On-location or studio portraits with a cinematic edge: personal branding, press shots,
-            social content and lookbooks that feel like you, not a template.
-          </p>
-          <div class="service-meta">
-            <span>½ day or full-day sessions</span>
-            <span>Retouched selects delivered</span>
-          </div>
-        </article>
-
-        <article class="service-card">
-          <h4>Events &amp; live sets</h4>
-          <span class="service-pill">For music &amp; culture</span>
-          <p>
-            Documentary-style coverage of gigs, launches, panels and festivals – high-energy stills plus
-            short recaps ready to post the next day.
-          </p>
-          <div class="service-meta">
-            <span>Multi-angle coverage</span>
-            <span>Photo + video options</span>
-          </div>
-        </article>
-
-        <article class="service-card">
-          <h4>Video editing</h4>
-          <span class="service-pill">For brands &amp; artists</span>
-          <p>
-            From raw footage to polished edits: showreels, music visuals, vertical social cuts and mini-docs,
-            paced and graded to match your sound.
-          </p>
-          <div class="service-meta">
-            <span>Social-ready formats</span>
-            <span>Multi-revision support</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section reveal" id="contact">
-      <div class="section-header">
-        <h2 class="section-title"><span>04</span> · Contact</h2>
-        <p class="section-subtitle">
-          Share a few details about your project and ideal dates – she’ll respond with availability and a tailored rate.
-        </p>
-      </div>
-
-      <div class="contact-grid">
-        <form class="contact-card" onsubmit="handleContactSubmit(event)">
-          <div class="field-row">
-            <div class="field-group">
-              <label for="name">Name</label>
-              <input class="field" id="name" type="text" name="name" placeholder="Your name" required />
-            </div>
-            <div class="field-group">
-              <label for="email">Email</label>
-              <input class="field" id="email" type="email" name="email" placeholder="your@email.com" required />
-            </div>
           </div>
 
-          <div class="field-row">
-            <div class="field-group">
-              <label for="project">Project type</label>
-              <input class="field" id="project" type="text" name="project" placeholder="Portraits, event, video edit..." />
-            </div>
-            <div class="field-group">
-              <label for="date">Ideal date</label>
-              <input class="field" id="date" type="text" name="date" placeholder="Month or exact date" />
-            </div>
+          <div class="col-lg-8">
+            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Project type (branding, campaign, video...)" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Tell me about your idea, budget and timeline." required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit" class="btn btn-primary">Send Message</button>
+                  <a class="btn btn-outline-secondary ms-2" href="Assets/CV/Shayonika%20Behera%202025.pdf" download>Download CV</a>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+          <div class="col-12 mt-3">
+            <p>LinkedIn: <a href="https://linkedin.com/in/shayonika-behera-58839427a" target="_blank" rel="noreferrer">linkedin.com/in/shayonika-behera-58839427a</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/_vodkanic._/" target="_blank" rel="noreferrer">@_vodkanic._</a></p>
           </div>
 
-          <div style="margin-bottom: 10px;">
-            <label for="message">Project details</label>
-            <textarea class="field" id="message" name="message" placeholder="Tell me about your idea, mood, references and timeline." required></textarea>
-          </div>
-
-          <button type="submit" class="btn-primary">Prepare email draft</button>
-          <p class="contact-note">
-            This will open your email app with a pre-filled message – you can adjust any details before sending.
-          </p>
-        </form>
-
-        <div class="contact-card">
-          <p class="contact-meta">
-            Based in <strong>London, UK</strong>, available for travel and remote editing work.
-            Full portfolio and additional projects available on request.
-          </p>
-
-          <div class="contact-links">
-            <!-- TODO: Replace # with real links (Instagram, TikTok, website, etc.) -->
-            <a class="contact-chip" href="#" target="_blank" rel="noreferrer">
-              <!-- camera icon -->
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M7 7.5L8.5 5.5H15.5L17 7.5H19C20.1046 7.5 21 8.39543 21 9.5V17C21 18.1046 20.1046 19 19 19H5C3.89543 19 3 18.1046 3 17V9.5C3 8.39543 3.89543 7.5 5 7.5H7Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                <circle cx="12" cy="13" r="3.2" stroke="currentColor" stroke-width="1.4" />
-              </svg>
-              Instagram
-            </a>
-
-            <a class="contact-chip" href="#" target="_blank" rel="noreferrer">
-              <!-- play icon -->
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M8.5 7.5L16 12L8.5 16.5V7.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" />
-                <rect x="4" y="5" width="16" height="14" rx="3" stroke="currentColor" stroke-width="1.4" />
-              </svg>
-              Video highlights
-            </a>
-
-            <a class="contact-chip" href="mailto:hello@example.com">
-              <!-- mail icon -->
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M4 7C4 5.89543 4.89543 5 6 5H18C19.1046 5 20 5.89543 20 7V17C20 18.1046 19.1046 19 18 19H6C4.89543 19 4 18.1046 4 17V7Z" stroke="currentColor" stroke-width="1.4" />
-                <path d="M5.5 7.5L11.12 11.35C11.67 11.73 12.33 11.73 12.88 11.35L18.5 7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-              </svg>
-              Direct email
-            </a>
-          </div>
         </div>
+
       </div>
-    </section>
+
+    </section><!-- /Contact Section -->
+
   </main>
 
-  <footer>
-    <span>&copy; <strong id="year"></strong> Shayonika · Photography &amp; Video.</span>
-    <span>Designed by Nathan · Built for GitHub Pages.</span>
+  <footer id="footer" class="footer position-relative light-background">
+    <div class="container text-center">
+      <h3 class="sitename">Shayonika Behera</h3>
+      <p>© 2025 Shayonika Behera | Designed with purpose.<br>Built by Nathan Brown-Bennett.</p>
+    </div>
   </footer>
 
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files (CDN fallbacks) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File (local) -->
+  <script src="main.js"></script>
+
 </body>
-  <!-- AOS script -->
-  <script src="MyResume-1.0.0/assets/vendor/aos/aos.js"></script>
-  <script src="index.js" defer></script>
-</body>
-</body>
+
 </html>
