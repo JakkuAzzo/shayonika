@@ -9,34 +9,8 @@
 (function() {
   "use strict";
 
-  /**
-   * Header toggle
-   */
-  const headerToggleBtn = document.querySelector('.header-toggle');
-
-  function headerToggle() {
-    // Toggle collapsed state so header can be shown/hidden on all screen sizes
-    const header = document.querySelector('#header');
-    if (!header) return;
-    header.classList.toggle('header-collapsed');
-    headerToggleBtn.classList.toggle('bi-list');
-    headerToggleBtn.classList.toggle('bi-x');
-  }
-  headerToggleBtn.addEventListener('click', headerToggle);
-
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
-      // If header is currently visible (not collapsed), collapse it after clicking a link
-      const header = document.querySelector('#header');
-      if (header && !header.classList.contains('header-collapsed')) {
-        headerToggle();
-      }
-    });
-
-  });
+  // Header toggle removed: the hamburger control was intentionally removed from the HTML.
+  // No-op here to avoid errors when the element is absent.
 
   /**
    * Toggle mobile nav dropdowns
@@ -133,11 +107,90 @@
   });
 
   /**
-   * Initiate glightbox
+   * Initiate GLightbox instances
+   * - image previews use links with class .preview-link
+   * - video previews inside .video-scroller use a dedicated instance with a small fallback
    */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
+  const glightboxImages = GLightbox({ selector: '.glightbox.preview-link' });
+
+  // Video lightbox with fallback: if the lightbox doesn't open (e.g. Drive blocks embedding),
+  // open the video href in a new tab after a short timeout.
+  let videoLightboxOpened = false;
+  const glightboxVideos = GLightbox({
+    selector: '.video-scroller .glightbox',
+    onOpen: () => { videoLightboxOpened = true; },
+    onClose: () => { videoLightboxOpened = false; }
   });
+
+  // Fallback handler: attempt to open in new tab if onOpen didn't run within 900ms
+  document.querySelectorAll('.video-scroller a.glightbox').forEach(a => {
+    a.addEventListener('click', function () {
+      videoLightboxOpened = false;
+      const href = this.href;
+      setTimeout(() => {
+        if (!videoLightboxOpened) {
+          // open in a new tab so the user can still view the video
+          window.open(href, '_blank');
+        }
+      }, 900);
+    });
+  });
+
+  /**
+   * Hero slide controls (pause / prev / next)
+   * - Default behavior: CSS animation cycles slides
+   * - When user pauses or uses prev/next we enter manual mode and control slides via JS
+   */
+  (function initHeroControls() {
+    const wrapper = document.querySelector('.hero-bg-slides');
+    if (!wrapper) return;
+    const slides = Array.from(wrapper.querySelectorAll('.hero-slide'));
+    if (!slides.length) return;
+
+    let index = 0;
+    // mark initial active slide for manual mode
+    slides.forEach(s => s.classList.remove('active'));
+    slides[0].classList.add('active');
+
+    const setActive = (i) => {
+      slides.forEach(s => s.classList.remove('active'));
+      slides[i].classList.add('active');
+      index = i;
+    };
+
+    const enterManual = () => {
+      if (!wrapper.classList.contains('manual')) wrapper.classList.add('manual');
+      // set play button state
+      const playBtn = document.getElementById('hero-play');
+      if (playBtn) playBtn.innerText = 'Play';
+    };
+
+    const exitManual = () => {
+      if (wrapper.classList.contains('manual')) wrapper.classList.remove('manual');
+      const playBtn = document.getElementById('hero-play');
+      if (playBtn) playBtn.innerText = 'Pause';
+    };
+
+    const prev = () => { enterManual(); setActive((index - 1 + slides.length) % slides.length); };
+    const next = () => { enterManual(); setActive((index + 1) % slides.length); };
+
+    const prevBtn = document.getElementById('hero-prev');
+    const nextBtn = document.getElementById('hero-next');
+    const playBtn = document.getElementById('hero-play');
+
+    if (prevBtn) prevBtn.addEventListener('click', (e) => { e.preventDefault(); prev(); });
+    if (nextBtn) nextBtn.addEventListener('click', (e) => { e.preventDefault(); next(); });
+    if (playBtn) playBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (wrapper.classList.contains('manual')) {
+        // resume auto animation
+        exitManual();
+      } else {
+        // pause and enter manual mode
+        enterManual();
+      }
+    });
+  })();
 
   /**
    * Init isotope layout and filters
@@ -175,21 +228,7 @@
   /**
    * Init swiper sliders
    */
-  function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector(".swiper-config").innerHTML.trim()
-      );
-
-      if (swiperElement.classList.contains("swiper-tab")) {
-        initSwiperWithCustomPagination(swiperElement, config);
-      } else {
-        new Swiper(swiperElement, config);
-      }
-    });
-  }
-
-  window.addEventListener("load", initSwiper);
+  // Swiper initialization removed (testimonials removed)
 
   /**
    * Correct scrolling position upon page load for URLs containing hash links.

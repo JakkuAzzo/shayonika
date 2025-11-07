@@ -1,15 +1,3 @@
-/**
-* Template Name: MyResume
-* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-* Updated: Jun 29 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
 /* Fonts */
 :root {
   --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -147,18 +135,22 @@ h6 {
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
+  /* make header overlay the page (no solid surface) */
+  bottom: auto;
   padding: 0 15px;
   transition: all ease-in-out 0.3s;
-  overflow-y: auto;
+  overflow-y: visible;
   z-index: 997;
-  min-width: 200px;
+  /* do not reserve horizontal layout space so it sits on top of content */
+  min-width: 0;
+  width: auto;
+  background: transparent; /* remove header background so it overlays the page */
 }
 
 @media (max-width: 1199px) {
   .header {
-    background-color: var(--background-color);
-    border-right: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    /* keep header transparent on small screens too so it overlays content */
+    background-color: transparent;
     width: 300px;
     left: -100%;
   }
@@ -200,28 +192,64 @@ h6 {
   }
 }
 
-.header .header-toggle {
-  color: var(--contrast-color);
-  background-color: var(--accent-color);
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 9999;
-  transition: background-color 0.3s;
+
+/* Override: keep main content full-width since header is now an overlay */
+.header ~ .main {
+  margin-left: 0 !important;
 }
 
-.header .header-toggle:hover {
-  color: var(--contrast-color);
-  background-color: color-mix(in srgb, var(--accent-color) 90%, white 15%);
+.header ~ .main .hero {
+  margin-left: 0 !important;
+  width: 100vw !important;
 }
+
+/* Video scroller for portfolio (horizontal gallery) */
+.video-scroller { display:flex; gap:1rem; overflow-x:auto; padding:1rem 0; -webkit-overflow-scrolling:touch; }
+.video-card { min-width:260px; max-width:320px; height:160px; background:#111; color:#fff; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; }
+.video-card .play { font-size:28px; opacity:0.95; }
+.video-card .label { font-size:0.95rem; margin-top:0.35rem; opacity:0.9; }
+.video-card:focus, .video-card:hover { box-shadow:0 8px 20px rgba(0,0,0,0.35); transform:translateY(-4px); transition:transform .18s ease; }
+
+/* Hero fading background slides (Logo Competition Award images at ~62% visible) */
+.hero-bg-slides { position:absolute; inset:0; z-index:0; overflow:hidden; }
+.hero-bg-slides .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; animation:fadeSlide 18s infinite; }
+.hero-bg-slides .hero-slide:nth-child(1) { animation-delay:0s; }
+.hero-bg-slides .hero-slide:nth-child(2) { animation-delay:6s; }
+.hero-bg-slides .hero-slide:nth-child(3) { animation-delay:12s; }
+.hero-bg-slides .hero-slide::after { content:""; position:absolute; inset:0; background:rgba(255,255,255,0.0); }
+
+@keyframes fadeSlide {
+  0% { opacity:0; transform:scale(1.03); }
+  6% { opacity:0.62; transform:scale(1); }
+  30% { opacity:0.62; transform:scale(1); }
+  36% { opacity:0; transform:scale(1.03); }
+  100% { opacity:0; }
+}
+
+/* ensure hero content sits above slides */
+#hero .container, #hero .container * { position:relative; z-index:1; }
+
+/* make hero section a positioned container for background slides */
+#hero { position:relative; overflow:hidden; }
+
+/* Manual-mode overrides: when user pauses the slideshow we remove the CSS animation and control visibility via .active */
+.hero-bg-slides.manual .hero-slide {
+  animation: none !important;
+  opacity: 0 !important;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  transform: scale(1);
+}
+.hero-bg-slides.manual .hero-slide.active {
+  opacity: 0.62 !important;
+  transform: scale(1) !important;
+}
+
+/* Hero controls */
+.hero-controls { position: absolute; left: 50%; transform: translateX(-50%); bottom: 1.25rem; z-index: 3; display: flex; gap: 0.5rem; }
+.hero-controls .btn { background: rgba(0,0,0,0.6); color: #fff; border: none; padding: 0.45rem 0.7rem; border-radius: 6px; }
+.hero-controls .btn:focus { outline: 2px solid color-mix(in srgb, var(--accent-color), white 35%); }
+
+/* Header toggle styles removed (hamburger control not used) */
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -1476,5 +1504,5 @@ section,
 # Starter Section Section
 --------------------------------------------------------------*/
 .starter-section {
-  /* Add your styles here */
+  padding: 0;
 }
