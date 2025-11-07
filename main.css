@@ -211,7 +211,7 @@ h6 {
 .video-card:focus, .video-card:hover { box-shadow:0 8px 20px rgba(0,0,0,0.35); transform:translateY(-4px); transition:transform .18s ease; }
 
 /* Hero fading background slides (Logo Competition Award images at ~62% visible) */
-.hero-bg-slides { position:absolute; inset:0; z-index:0; overflow:hidden; }
+.hero-bg-slides { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events: none; }
 .hero-bg-slides .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; animation:fadeSlide 18s infinite; }
 .hero-bg-slides .hero-slide:nth-child(1) { animation-delay:0s; }
 .hero-bg-slides .hero-slide:nth-child(2) { animation-delay:6s; }
@@ -227,7 +227,7 @@ h6 {
 }
 
 /* ensure hero content sits above slides */
-#hero .container, #hero .container * { position:relative; z-index:1; }
+#hero .container, #hero .container * { position:relative; z-index:4; }
 
 /* make hero section a positioned container for background slides */
 #hero { position:relative; overflow:hidden; }
@@ -245,7 +245,7 @@ h6 {
 }
 
 /* Hero controls */
-.hero-controls { position: absolute; left: 50%; transform: translateX(-50%); bottom: 1.25rem; z-index: 3; display: flex; gap: 0.5rem; }
+.hero-controls { position: absolute; left: 50%; transform: translateX(-50%); bottom: 1.25rem; z-index: 5; display: flex; gap: 0.5rem; }
 .hero-controls .btn { background: rgba(0,0,0,0.6); color: #fff; border: none; padding: 0.45rem 0.7rem; border-radius: 6px; }
 .hero-controls .btn:focus { outline: 2px solid color-mix(in srgb, var(--accent-color), white 35%); }
 
@@ -257,6 +257,34 @@ h6 {
 .navmenu {
   padding: 0;
   z-index: 9997;
+  position: fixed;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Mobile adjustments: bring navmenu slightly inward and hide labels on small screens */
+@media (max-width: 767px) {
+  .navmenu {
+    left: 10px; /* slightly inset on small devices */
+  }
+  /* Hide the text labels to save horizontal space on narrow viewports */
+  .navmenu a span {
+    display: none;
+  }
+}
+
+/* Very short viewports (e.g. small mobiles or when keyboard is open):
+   add a subtle panel so the nav stays visible against content */
+@media (max-height: 420px) {
+  .navmenu {
+    background: rgba(255,255,255,0.94);
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    left: 8px;
+  }
+  .navmenu ul { padding-bottom: 6px; }
 }
 
 .navmenu ul {
@@ -323,6 +351,38 @@ h6 {
 .navmenu a:hover span,
 .navmenu li:hover>a span {
   display: block;
+}
+
+/*--------------------------------------------------------------
+# Portfolio uniform cards
+--------------------------------------------------------------*/
+/* Make each portfolio column a vertical flex container so image + info
+   stack and the info area can stretch to keep cards visually consistent. */
+.portfolio .row > [class*="col-"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio .row > [class*="col-"] img.img-fluid {
+  width: 100%;
+  height: 240px; /* fixed image height for uniformity */
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.portfolio .row > [class*="col-"] .portfolio-info {
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Ensure portfolio items keep equal height within each row on wider screens */
+@media (min-width: 992px) {
+  .portfolio .row { align-items: stretch; }
+  .portfolio .row > [class*="col-"] { height: 100%; }
 }
 
 /*--------------------------------------------------------------
