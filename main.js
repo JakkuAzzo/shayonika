@@ -24,64 +24,42 @@
     });
   });
 
-  /**
-   * Preloader
-   */
-  const preloader = document.querySelector('#preloader');
+  // Preloader: remove on window load, with a safety timeout fallback
+  const preloader = document.getElementById('preloader');
   if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
+    const removePreloader = () => { if (preloader && preloader.parentNode) preloader.remove(); };
+    window.addEventListener('load', removePreloader, { once: true });
+    // Safety: ensure it goes away even if load hangs due to a third-party asset
+    setTimeout(removePreloader, 6000);
   }
 
-  /**
-   * Scroll top button
-   */
-  let scrollTop = document.querySelector('.scroll-top');
-
-  function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
-    }
-  }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-
-  window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
-
-  /**
-   * Animation on scroll function and init
-   */
+  // AOS (Animate On Scroll) init – required so elements with data-aos become visible
   function aosInit() {
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        duration: 600,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+      });
+    }
   }
   window.addEventListener('load', aosInit);
 
-  /**
-   * Init typed.js
-   */
+  // Typed.js init (guarded)
   const selectTyped = document.querySelector('.typed');
   if (selectTyped) {
-    let typed_strings = selectTyped.getAttribute('data-typed-items');
-    typed_strings = typed_strings.split(',');
-    new Typed('.typed', {
-      strings: typed_strings,
-      loop: true,
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 2000
-    });
+    let typed_strings = selectTyped.getAttribute('data-typed-items') || '';
+    typed_strings = typed_strings.split(',').map(s => s.trim()).filter(Boolean);
+    if (typed_strings.length) {
+      new Typed('.typed', {
+        strings: typed_strings,
+        loop: true,
+        typeSpeed: 100,
+        backSpeed: 50,
+        backDelay: 2000
+      });
+    }
   }
 
   /**
@@ -107,34 +85,110 @@
   });
 
   /**
-   * Initiate GLightbox instances
-   * - image previews use links with class .preview-link
-   * - video previews inside .video-scroller use a dedicated instance with a small fallback
+   * GLightbox for images. Video anchors are handled by delegated click handler below.
    */
   const glightboxImages = GLightbox({ selector: '.glightbox.preview-link' });
 
-  // Video lightbox with fallback: if the lightbox doesn't open (e.g. Drive blocks embedding),
-  // open the video href in a new tab after a short timeout.
-  let videoLightboxOpened = false;
-  const glightboxVideos = GLightbox({
-    selector: '.video-scroller .glightbox',
-    onOpen: () => { videoLightboxOpened = true; },
-    onClose: () => { videoLightboxOpened = false; }
+  /**
+   * Delegated click handler for video lightbox with multi-step fallback.
+   */
+  document.addEventListener('click', function(e) {
+    const anchor = e.target && e.target.closest && e.target.closest('.video-scroller a.glightbox');
+    if (!anchor) return;
+    e.preventDefault();
+
+    const originalHref = anchor.href;
+    const previewHref = originalHref.replace(/\/view(\?[^#]*)?$/, '/preview');
+    const fileIdMatch = originalHref.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    const fileId = fileIdMatch ? fileIdMatch[1] : null;
+    const directHref = fileId ? `https://drive.google.com/uc?export=download&id=${fileId}` : originalHref;
+
+    let opened = false;
+    const inst1 = GLightbox({
+      elements: [{ href: previewHref, type: 'iframe' }],
+      onOpen: () => { opened = true; },
+      onClose: () => { opened = false; }
+    });
+    inst1.open();
+
+    setTimeout(() => {
+      if (opened) return;
+      let opened2 = false;
+      const inst2 = GLightbox({
+        elements: [{ href: directHref, type: 'video' }],
+        onOpen: () => { opened2 = true; },
+        onClose: () => { opened2 = false; }
+      });
+      inst2.open();
+      setTimeout(() => { if (!opened2) window.open(directHref, '_blank'); }, 800);
+    }, 800);
   });
 
-  // Fallback handler: attempt to open in new tab if onOpen didn't run within 900ms
-  document.querySelectorAll('.video-scroller a.glightbox').forEach(a => {
-    a.addEventListener('click', function () {
-      videoLightboxOpened = false;
-      const href = this.href;
-      setTimeout(() => {
-        if (!videoLightboxOpened) {
-          // open in a new tab so the user can still view the video
-          window.open(href, '_blank');
-        }
-      }, 900);
+  /**
+   * Populate video gallery from a plain text list file.
+   * File format: <url> - <title>
+   * The file lives at `Assets/Videos/videos.txt` (normalized path with no trailing space).
+   */
+  (function populateVideoGallery() {
+    // Cache-bust locally to avoid stale list during development; keep cache in production
+    const isLocal = ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
+    const listPath = 'Assets/Videos/videos.txt' + (isLocal ? `?v=${Date.now()}` : '');
+    const scroller = document.querySelector('.video-scroller');
+    if (!scroller) return;
+
+    fetch(listPath).then(r => {
+      if (!r.ok) throw new Error('Could not fetch videos list');
+      return r.text();
+    }).then(text => {
+      const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+
+      // Optional thumbnails mapped by index; fallback to first image when missing
+      const thumbnails = [
+        'Assets/Images/Perfume advert/Pink Minimalist New Product Skincare Poster.PNG',
+        'Assets/Images/Perfume advert/DC4631ED-4DFB-4BAB-9A82-B6D3FC93F7EE.PNG',
+        'Assets/Images/Logo Competition Award/Untitled design.png',
+        'Assets/Images/Logo Competition Award/Shades of Brown Minimal Aesthetic Fashion Collection Instagram Post (1).png',
+        'Assets/Images/Logo Competition Award/WhatsApp Image 2024-02-23 at 14.05.15_794f1019.jpg'
+      ];
+
+      scroller.innerHTML = '';
+
+      lines.forEach((line, i) => {
+        const parts = line.split(' - ');
+        let url = parts[0].trim();
+        const title = (parts.slice(1).join(' - ') || `Video ${i+1}`).trim();
+
+        // Normalize common Drive share URLs to the /preview form used for embedding
+        url = url.replace('/view?usp=drive_link', '/preview').replace('/view?usp=drivesdk', '/preview');
+
+        const a = document.createElement('a');
+        a.className = 'glightbox';
+        a.setAttribute('data-type', 'iframe');
+        a.href = url;
+
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.setAttribute('role', 'button');
+        card.tabIndex = 0;
+        const thumb = thumbnails[i] || thumbnails[0];
+        card.style.backgroundImage = `url('${thumb}')`;
+
+        const play = document.createElement('div'); play.className = 'play'; play.textContent = '▶';
+        const label = document.createElement('div'); label.className = 'label'; label.textContent = title;
+
+        card.appendChild(play);
+        card.appendChild(label);
+        a.appendChild(card);
+        scroller.appendChild(a);
+      });
+
+      // No need to re-init GLightbox here; the delegated click handler above
+      // handles dynamically added anchors reliably.
+
+    }).catch(err => {
+      console.warn('Could not populate video gallery from list:', err);
     });
-  });
+  })();
 
   /**
    * Hero slide controls (pause / prev / next)
