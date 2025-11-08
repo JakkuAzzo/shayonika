@@ -428,6 +428,64 @@ h6 {
   position: relative;
 }
 
+/* Resume dark theme with subdued background image */
+#resume.resume-dark {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+#resume.resume-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Dark overlay to reduce image intensity to ~40% visible */
+  background: rgba(0,0,0,0.6);
+  z-index: 0;
+}
+#resume.resume-dark .container, #resume.resume-dark .row, #resume.resume-dark [class*="col-"] { position: relative; z-index: 1; }
+#resume.resume-dark h2, #resume.resume-dark h3, #resume.resume-dark h4, #resume.resume-dark h5, #resume.resume-dark h6 { color:#fff; }
+#resume.resume-dark p, #resume.resume-dark li { color:#fff; }
+#resume.resume-dark .resume-item { background: transparent; border-left: 3px solid rgba(255,255,255,0.4); padding-left: 15px; }
+#resume.resume-dark a.btn.btn-primary { box-shadow:0 4px 12px rgba(0,0,0,0.4); }
+
+/* Achievements dark theme with background image */
+#achievements.achievements-dark {
+  position: relative;
+  background-size: cover;
+  /* Shift image downward to reveal heads (adjust Y %) */
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+#services.services-dark {
+  position: relative;
+  /* Dark grey background at 50% opacity, cards keep their original styling */
+  background-color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+/* Make the Services heading and intro text stand out on the dark background */
+#services.services-dark .section-title h2 { color: #fff; }
+#services.services-dark .services-intro h3,
+#services.services-dark .services-intro p.lead { color: #fff; }
+#services.services-dark .services-intro hr { border-color: rgba(255,255,255,0.4); }
+#achievements.achievements-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6); /* image visible ~40% */
+  z-index: 0;
+}
+#achievements.achievements-dark .container,
+#achievements.achievements-dark .row,
+#achievements.achievements-dark [class*="col-"] {
+  position: relative; z-index: 1;
+}
+#achievements.achievements-dark h2, #achievements.achievements-dark h3, #achievements.achievements-dark h4 { color:#fff; }
+#achievements.achievements-dark p, #achievements.achievements-dark li { color:#fff; }
+
 .footer h3 {
   font-size: 36px;
   font-weight: 700;
