@@ -206,61 +206,7 @@
     });
   })();
 
-  /**
-   * Hero slide controls (pause / prev / next)
-   * - Default behavior: CSS animation cycles slides
-   * - When user pauses or uses prev/next we enter manual mode and control slides via JS
-   */
-  (function initHeroControls() {
-    const wrapper = document.querySelector('.hero-bg-slides');
-    if (!wrapper) return;
-    const slides = Array.from(wrapper.querySelectorAll('.hero-slide'));
-    if (!slides.length) return;
-
-    let index = 0;
-    // mark initial active slide for manual mode
-    slides.forEach(s => s.classList.remove('active'));
-    slides[0].classList.add('active');
-
-    const setActive = (i) => {
-      slides.forEach(s => s.classList.remove('active'));
-      slides[i].classList.add('active');
-      index = i;
-    };
-
-    const enterManual = () => {
-      if (!wrapper.classList.contains('manual')) wrapper.classList.add('manual');
-      // set play button state
-      const playBtn = document.getElementById('hero-play');
-      if (playBtn) playBtn.innerText = 'Play';
-    };
-
-    const exitManual = () => {
-      if (wrapper.classList.contains('manual')) wrapper.classList.remove('manual');
-      const playBtn = document.getElementById('hero-play');
-      if (playBtn) playBtn.innerText = 'Pause';
-    };
-
-    const prev = () => { enterManual(); setActive((index - 1 + slides.length) % slides.length); };
-    const next = () => { enterManual(); setActive((index + 1) % slides.length); };
-
-    const prevBtn = document.getElementById('hero-prev');
-    const nextBtn = document.getElementById('hero-next');
-    const playBtn = document.getElementById('hero-play');
-
-    if (prevBtn) prevBtn.addEventListener('click', (e) => { e.preventDefault(); prev(); });
-    if (nextBtn) nextBtn.addEventListener('click', (e) => { e.preventDefault(); next(); });
-    if (playBtn) playBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (wrapper.classList.contains('manual')) {
-        // resume auto animation
-        exitManual();
-      } else {
-        // pause and enter manual mode
-        enterManual();
-      }
-    });
-  })();
+  // Hero slideshow logic removed; static collage now used.
 
   /**
    * Init isotope layout and filters

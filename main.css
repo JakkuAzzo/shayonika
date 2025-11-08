@@ -149,10 +149,11 @@ h6 {
 
 @media (max-width: 1199px) {
   .header {
-    /* keep header transparent on small screens too so it overlays content */
+    /* On small screens, turn header into a top bar and keep it visible */
     background-color: transparent;
-    width: 300px;
-    left: -100%;
+    width: 100%;
+    left: 0;
+    top: 0;
   }
 }
 
@@ -241,13 +242,19 @@ h6 {
 #video-inline-player .close-player:focus,
 #video-inline-player .video-close-btn:focus { outline: 2px solid var(--accent-color); outline-offset: 2px; }
 
-/* Hero fading background slides (Logo Competition Award images with dark opaque overlay) */
-.hero-bg-slides { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events: none; }
-.hero-bg-slides .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; animation:fadeSlide 18s infinite; }
-.hero-bg-slides .hero-slide:nth-child(1) { animation-delay:0s; }
-.hero-bg-slides .hero-slide:nth-child(2) { animation-delay:6s; }
-.hero-bg-slides .hero-slide:nth-child(3) { animation-delay:12s; }
-.hero-bg-slides .hero-slide::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,0.5); }
+/* Hero collage background (static, ~40% opacity) */
+.hero-collage { position:absolute; inset:0; z-index:0; pointer-events:none; display:grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(4, 1fr); gap: 10px; padding: 10px; opacity: 0.4; }
+.hero-tile { background-size: cover; background-position: center; border-radius: 10px; }
+/* Tile placements for a simple collage layout */
+.hero-collage .tile-1 { grid-column: 1 / span 3; grid-row: 1 / span 2; }
+.hero-collage .tile-2 { grid-column: 4 / span 3; grid-row: 1 / span 2; }
+.hero-collage .tile-3 { grid-column: 2 / span 4; grid-row: 3 / span 2; }
+@media (max-width: 768px) {
+  .hero-collage { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(6, 1fr); gap: 6px; padding: 8px; }
+  .hero-collage .tile-1 { grid-column: 1 / span 4; grid-row: 1 / span 2; }
+  .hero-collage .tile-2 { grid-column: 1 / span 4; grid-row: 3 / span 2; }
+  .hero-collage .tile-3 { grid-column: 1 / span 4; grid-row: 5 / span 2; }
+}
 
 @keyframes fadeSlide {
   0% { opacity:0; transform:scale(1.03); }
@@ -257,28 +264,45 @@ h6 {
   100% { opacity:0; }
 }
 
-/* ensure hero content sits above slides */
+/* ensure hero content sits above collage */
 #hero .container, #hero .container * { position:relative; z-index:4; }
 
 /* make hero section a positioned container for background slides */
 #hero { position:relative; overflow:hidden; }
 
-/* Manual-mode overrides: when user pauses the slideshow we remove the CSS animation and control visibility via .active */
-.hero-bg-slides.manual .hero-slide {
-  animation: none !important;
-  opacity: 0 !important;
-  transition: opacity 0.35s ease, transform 0.35s ease;
-  transform: scale(1);
-}
-.hero-bg-slides.manual .hero-slide.active {
-  opacity: 0.62 !important;
-  transform: scale(1) !important;
+/* Remove slideshow-specific overrides (no longer used) */
+
+/* Hero controls removed */
+
+/* Hero text color */
+#hero .hero-title,
+#hero .hero-title .hero-role,
+#hero .hero-subtext { color: #fff; }
+
+/* Blur the page background when a Bootstrap modal is open so the modal feels focused.
+   Apply blur to all top-level siblings except the modal and the backdrop so the modal remains sharp.
+*/
+body.modal-open > *:not(.modal):not(.modal-backdrop) {
+  filter: blur(6px) saturate(95%);
+  -webkit-filter: blur(6px) saturate(95%);
+  transition: filter 220ms ease, -webkit-filter 220ms ease;
+  pointer-events: none; /* prevent accidental clicks behind modal */
 }
 
-/* Hero controls */
-.hero-controls { position: absolute; left: 50%; transform: translateX(-50%); bottom: 1.25rem; z-index: 5; display: flex; gap: 0.5rem; }
-.hero-controls .btn { background: rgba(0,0,0,0.6); color: #fff; border: none; padding: 0.45rem 0.7rem; border-radius: 6px; }
-.hero-controls .btn:focus { outline: 2px solid color-mix(in srgb, var(--accent-color), white 35%); }
+/* Keep modal and backdrop unaffected; add slight backdrop darkening + blur for browsers that support it */
+.modal-backdrop.show {
+  background-color: rgba(0,0,0,0.45) !important;
+  backdrop-filter: blur(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.modal-open > *:not(.modal):not(.modal-backdrop) {
+    filter: none;
+    -webkit-filter: none;
+    pointer-events: auto;
+  }
+  .modal-backdrop.show { backdrop-filter: none; }
+}
 
 /* Header toggle styles removed (hamburger control not used) */
 
@@ -294,35 +318,39 @@ h6 {
   transform: translateY(-50%);
 }
 
-/* Mobile adjustments: move navigation to top bar */
+/* Mobile adjustments: move navigation to a simple full-width top bar (no pill) */
 @media (max-width: 767px) {
   .navmenu {
-    left: 50%;
-    top: 10px;
-    transform: translateX(-50%);
-    background: rgba(255,255,255,0.95);
-    padding: 8px 12px;
-    border-radius: 50px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    left: 0;
+    right: 0;
+    top: 0;
+    transform: none;
+    background: transparent; /* no white pill */
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
   .navmenu ul {
     display: flex;
-    flex-direction: row;
-    gap: 4px;
-    padding: 0;
-    width: auto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 8px;
+    padding: 8px 10px;
+    margin: 0;
+    width: 100%;
   }
-  /* Hide the text labels to save horizontal space on narrow viewports */
-  .navmenu a span {
-    display: none;
-  }
+  /* Show text labels; adjust link paddings for bar layout */
+  .navmenu a span { display: inline; }
   .navmenu a,
   .navmenu a:focus {
-    padding: 8px 12px;
+    padding: 8px 10px;
     margin-bottom: 0;
-    height: 40px;
-    min-width: 40px;
+    height: auto;
+    min-width: 0;
     width: auto;
+    border-radius: 6px; /* small radius for individual links */
+    background: color-mix(in srgb, var(--default-color), transparent 92%);
   }
 }
 
@@ -387,8 +415,10 @@ h6 {
     opacity: 0;
   }
   
+  /* Allow the nav to expand correctly on hover by not constraining UL width */
   .navmenu ul {
-    width: 48px;
+    width: auto;
+    min-width: 48px;
   }
 }
 
