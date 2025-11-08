@@ -90,38 +90,54 @@
   const glightboxImages = GLightbox({ selector: '.glightbox.preview-link' });
 
   /**
-   * Delegated click handler for video lightbox with multi-step fallback.
+   * Delegated click handler for video cards: inline iframe playback.
+   * Click injects a Drive preview iframe into #video-inline-player.
+   * Fallback: if iframe fails to load (timeout), open in new tab.
    */
   document.addEventListener('click', function(e) {
     const anchor = e.target && e.target.closest && e.target.closest('.video-scroller a.glightbox');
     if (!anchor) return;
     e.preventDefault();
 
-    const originalHref = anchor.href;
-    const previewHref = originalHref.replace(/\/view(\?[^#]*)?$/, '/preview');
-    const fileIdMatch = originalHref.match(/\/d\/([a-zA-Z0-9_-]+)/);
-    const fileId = fileIdMatch ? fileIdMatch[1] : null;
-    const directHref = fileId ? `https://drive.google.com/uc?export=download&id=${fileId}` : originalHref;
+    const container = document.getElementById('video-inline-player');
+    if (!container) return;
 
-    let opened = false;
-    const inst1 = GLightbox({
-      elements: [{ href: previewHref, type: 'iframe' }],
-      onOpen: () => { opened = true; },
-      onClose: () => { opened = false; }
-    });
-    inst1.open();
+    // Extract title from card label
+    const labelEl = anchor.querySelector('.label');
+    const title = labelEl ? labelEl.textContent.trim() : 'Video';
 
-    setTimeout(() => {
-      if (opened) return;
-      let opened2 = false;
-      const inst2 = GLightbox({
-        elements: [{ href: directHref, type: 'video' }],
-        onOpen: () => { opened2 = true; },
-        onClose: () => { opened2 = false; }
-      });
-      inst2.open();
-      setTimeout(() => { if (!opened2) window.open(directHref, '_blank'); }, 800);
-    }, 800);
+    // Normalize URL to /preview form
+    let url = anchor.getAttribute('href');
+    url = url.replace(/\/view(\?[^#]*)?$/, '/preview');
+
+    // Build iframe
+    container.classList.remove('d-none');
+      container.innerHTML = '<button type="button" class="video-close-btn close-player" aria-label="Close video" aria-controls="video-inline-player"><i class="bi bi-x-lg" aria-hidden="true"></i><span class="visually-hidden">Close</span></button>' +
+      '<iframe title="'+ title.replace(/"/g,'&quot;') +'" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" frameborder="0" src="'+ url +'" style="width:100%;height:100%;border:0;"></iframe>';
+
+    // Close handler
+    const closeBtn = container.querySelector('.close-player');
+    if (closeBtn) {
+        const doClose = () => {
+        container.classList.add('d-none');
+        container.innerHTML = '';
+        };
+        closeBtn.addEventListener('click', doClose, { once: true });
+        // Allow ESC key to close when player is open
+        const onKey = (ev) => { if (ev.key === 'Escape') { doClose(); document.removeEventListener('keydown', onKey); } };
+        document.addEventListener('keydown', onKey);
+    }
+
+    // Fallback: if iframe doesn't finish loading quickly, open in new tab.
+    const iframe = container.querySelector('iframe');
+    let loaded = false;
+    if (iframe) {
+      iframe.addEventListener('load', () => { loaded = true; }, { once: true });
+      setTimeout(() => { if (!loaded) window.open(url, '_blank'); }, 2500);
+    }
+
+    // Scroll into view for user convenience
+    container.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 
   /**

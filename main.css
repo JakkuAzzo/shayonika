@@ -211,6 +211,36 @@ h6 {
 .video-card .label { font-size:0.95rem; margin-top:0.35rem; opacity:0.95; position:relative; z-index:2; }
 .video-card:focus, .video-card:hover { box-shadow:0 8px 20px rgba(0,0,0,0.35); transform:translateY(-4px); transition:transform .18s ease; }
 
+/* Inline video player styling */
+#video-inline-player { margin-top: 1rem; position: relative; }
+#video-inline-player .close-player,
+#video-inline-player .video-close-btn {
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
+  z-index: 1000; /* sit above iframe and any overlays */
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  user-select: none;
+  transition: background .15s ease, transform .12s ease;
+}
+#video-inline-player .video-close-btn i { pointer-events: none; }
+#video-inline-player .close-player:hover,
+#video-inline-player .video-close-btn:hover { background: rgba(0,0,0,.75); }
+#video-inline-player .close-player:active,
+#video-inline-player .video-close-btn:active { transform: scale(.94); }
+#video-inline-player .close-player:focus,
+#video-inline-player .video-close-btn:focus { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+
 /* Hero fading background slides (Logo Competition Award images at ~62% visible) */
 .hero-bg-slides { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events: none; }
 .hero-bg-slides .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; animation:fadeSlide 18s infinite; }
