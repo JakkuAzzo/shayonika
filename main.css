@@ -241,13 +241,13 @@ h6 {
 #video-inline-player .close-player:focus,
 #video-inline-player .video-close-btn:focus { outline: 2px solid var(--accent-color); outline-offset: 2px; }
 
-/* Hero fading background slides (Logo Competition Award images at ~62% visible) */
+/* Hero fading background slides (Logo Competition Award images with dark opaque overlay) */
 .hero-bg-slides { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events: none; }
 .hero-bg-slides .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; animation:fadeSlide 18s infinite; }
 .hero-bg-slides .hero-slide:nth-child(1) { animation-delay:0s; }
 .hero-bg-slides .hero-slide:nth-child(2) { animation-delay:6s; }
 .hero-bg-slides .hero-slide:nth-child(3) { animation-delay:12s; }
-.hero-bg-slides .hero-slide::after { content:""; position:absolute; inset:0; background:rgba(255,255,255,0.0); }
+.hero-bg-slides .hero-slide::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,0.5); }
 
 @keyframes fadeSlide {
   0% { opacity:0; transform:scale(1.03); }
@@ -294,14 +294,35 @@ h6 {
   transform: translateY(-50%);
 }
 
-/* Mobile adjustments: bring navmenu slightly inward and hide labels on small screens */
+/* Mobile adjustments: move navigation to top bar */
 @media (max-width: 767px) {
   .navmenu {
-    left: 10px; /* slightly inset on small devices */
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.95);
+    padding: 8px 12px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .navmenu ul {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    padding: 0;
+    width: auto;
   }
   /* Hide the text labels to save horizontal space on narrow viewports */
   .navmenu a span {
     display: none;
+  }
+  .navmenu a,
+  .navmenu a:focus {
+    padding: 8px 12px;
+    margin-bottom: 0;
+    height: 40px;
+    min-width: 40px;
+    width: auto;
   }
 }
 
@@ -356,12 +377,18 @@ h6 {
 
   .navmenu a,
   .navmenu a:focus {
-    max-width: 56px;
+    max-width: 48px;
+    width: 48px;
   }
 
   .navmenu a span,
   .navmenu a:focus span {
     display: none;
+    opacity: 0;
+  }
+  
+  .navmenu ul {
+    width: 48px;
   }
 }
 
@@ -376,12 +403,20 @@ h6 {
 .navmenu a:hover,
 .navmenu li:hover>a {
   max-width: 100%;
+  width: auto;
   color: var(--contrast-color);
 }
 
 .navmenu a:hover span,
 .navmenu li:hover>a span {
   display: block;
+  opacity: 1;
+  animation: fadeInText 0.3s ease-in-out;
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateX(-5px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 /*--------------------------------------------------------------
@@ -440,8 +475,8 @@ h6 {
   content: "";
   position: absolute;
   inset: 0;
-  /* Dark overlay to reduce image intensity to ~40% visible */
-  background: rgba(0,0,0,0.6);
+  /* Dark overlay for better contrast and readability */
+  background: rgba(0,0,0,0.7);
   z-index: 0;
 }
 #resume.resume-dark .container, #resume.resume-dark .row, #resume.resume-dark [class*="col-"] { position: relative; z-index: 1; }
@@ -475,7 +510,7 @@ h6 {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.6); /* image visible ~40% */
+  background: rgba(0,0,0,0.7); /* dark opaque overlay for better visual impact */
   z-index: 0;
 }
 #achievements.achievements-dark .container,
@@ -735,7 +770,7 @@ section,
 
 .hero:before {
   content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 30%);
+  background: rgba(0,0,0,0.4);
   position: absolute;
   inset: 0;
   z-index: 2;

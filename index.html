@@ -38,8 +38,9 @@
     @keyframes floatY { 0%{transform:translateY(0);}50%{transform:translateY(-6px);}100%{transform:translateY(0);} }
 
     /* About section background overlay readability */
-    #about { background-size:cover; background-position:center; background-repeat:no-repeat; }
-    #about .container { background: rgba(255,255,255,0.85); padding:1.5rem; border-radius:8px; }
+    #about { background-size:cover; background-position:center; background-repeat:no-repeat; position:relative; }
+    #about::before { content:""; position:absolute; inset:0; background:rgba(0,0,0,0.6); z-index:0; }
+    #about .container { background: rgba(255,255,255,0.95); padding:1.5rem; border-radius:8px; position:relative; z-index:1; }
     /* Make profile image a little round */
     .profile-img { border-radius:8px; max-width:100%; height:auto; }
     /* Video scroller styles moved to main.css */
