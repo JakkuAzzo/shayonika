@@ -348,41 +348,53 @@ body.modal-open > *:not(.modal):not(.modal-backdrop) {
   background: rgba(255,255,255,0.8);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  height: 64px;
+  height: 52px;
+  width: 100%;
 }
 
 /* Mobile adjustments: move navigation to a simple full-width top bar (no pill) */
 @media (max-width: 767px) {
   .navmenu { 
-    height: auto; 
-    padding: 6px 10px; 
-    padding-top: calc(env(safe-area-inset-top) + 6px);
+    height: 52px; 
+    padding: 4px 8px; 
+    padding-top: calc(env(safe-area-inset-top) + 4px);
   }
   .navmenu ul {
     display: flex;
     flex-direction: row;
-    gap: 6px;
-    padding: 6px 4px;
+    gap: 4px;
+    padding: 4px 2px;
     width: 100%;
     justify-content: space-between;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .navmenu a span { display: inline; }
   .navmenu a, .navmenu a:focus { 
-    padding: 8px 10px; 
+    padding: 6px 8px; 
     height: auto; 
-    border-radius:6px;
+    border-radius: 6px;
     min-height: 44px;
-    font-size: 14px;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }
 
-/* Extra-small screens: hide text labels, show icons only to save space */
+/* Extra-small screens: reduce padding further */
 @media (max-width: 420px) {
-  .navmenu a span { display: none; }
+  .navmenu { 
+    padding: 4px 4px; 
+  }
+  .navmenu ul {
+    gap: 2px;
+    padding: 4px 0;
+  }
   .navmenu a, .navmenu a:focus { 
-    padding: 10px; 
-    min-width: 44px;
-    justify-content: center;
+    padding: 6px 6px;
+    font-size: 12px;
+    min-width: auto;
   }
 }
 
@@ -441,9 +453,9 @@ body.modal-open > *:not(.modal):not(.modal-backdrop) {
 }
 
 /* push main content down so the top nav doesn't overlap it */
-.header { height: 64px; padding-top: env(safe-area-inset-top); }
+.header { height: 52px; padding-top: env(safe-area-inset-top); }
 .header ~ .main { 
-  margin-top: calc(64px + env(safe-area-inset-top)) !important; 
+  margin-top: calc(52px + env(safe-area-inset-top)) !important; 
   padding-bottom: env(safe-area-inset-bottom);
 }
 
