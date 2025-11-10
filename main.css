@@ -319,7 +319,7 @@ body.modal-open > *:not(.modal):not(.modal-backdrop) {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(255,255,255,0.02);
+  background: rgba(255,255,255,0.8);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   height: 64px;
