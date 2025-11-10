@@ -245,6 +245,16 @@ h6 {
 /* Hero collage background (static, ~40% opacity) */
 .hero-collage { position:absolute; inset:0; z-index:0; pointer-events:none; display:grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(4, 1fr); gap: 10px; padding: 10px; opacity: 0.4; }
 .hero-tile { background-size: cover; background-position: center; border-radius: 10px; }
+
+/* Dark overlay on hero to improve text contrast against variable background images */
+.hero-collage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55));
+  z-index: 2;
+  pointer-events: none;
+}
 /* Tile placements for a simple collage layout */
 .hero-collage .tile-1 { grid-column: 1 / span 3; grid-row: 1 / span 2; }
 .hero-collage .tile-2 { grid-column: 4 / span 3; grid-row: 1 / span 2; }
@@ -274,10 +284,25 @@ h6 {
 
 /* Hero controls removed */
 
-/* Hero text color */
+/* Hero text color with responsive sizing */
 #hero .hero-title,
 #hero .hero-title .hero-role,
 #hero .hero-subtext { color: #fff; }
+
+/* Responsive hero typography using clamp() to scale smoothly across devices */
+#hero .hero-title {
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  line-height: 1.05;
+}
+
+#hero .hero-title .hero-role {
+  font-size: clamp(0.9rem, 4vw, 1.5rem);
+}
+
+#hero .hero-subtext {
+  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+  line-height: 1.3;
+}
 
 /* Blur the page background when a Bootstrap modal is open so the modal feels focused.
    Apply blur to all top-level siblings except the modal and the backdrop so the modal remains sharp.
@@ -311,6 +336,7 @@ body.modal-open > *:not(.modal):not(.modal-backdrop) {
 --------------------------------------------------------------*/
 .navmenu {
   padding: 0 12px;
+  padding-top: env(safe-area-inset-top);
   z-index: 9997;
   position: fixed;
   top: 0;
@@ -327,7 +353,11 @@ body.modal-open > *:not(.modal):not(.modal-backdrop) {
 
 /* Mobile adjustments: move navigation to a simple full-width top bar (no pill) */
 @media (max-width: 767px) {
-  .navmenu { height: auto; padding: 6px 10px; }
+  .navmenu { 
+    height: auto; 
+    padding: 6px 10px; 
+    padding-top: calc(env(safe-area-inset-top) + 6px);
+  }
   .navmenu ul {
     display: flex;
     flex-direction: row;
@@ -337,7 +367,23 @@ body.modal-open > *:not(.modal):not(.modal-backdrop) {
     justify-content: space-between;
   }
   .navmenu a span { display: inline; }
-  .navmenu a, .navmenu a:focus { padding: 8px 10px; height: auto; border-radius:6px; }
+  .navmenu a, .navmenu a:focus { 
+    padding: 8px 10px; 
+    height: auto; 
+    border-radius:6px;
+    min-height: 44px;
+    font-size: 14px;
+  }
+}
+
+/* Extra-small screens: hide text labels, show icons only to save space */
+@media (max-width: 420px) {
+  .navmenu a span { display: none; }
+  .navmenu a, .navmenu a:focus { 
+    padding: 10px; 
+    min-width: 44px;
+    justify-content: center;
+  }
 }
 
 /* Very short viewports (e.g. small mobiles or when keyboard is open):
@@ -367,11 +413,13 @@ body.modal-open > *:not(.modal):not(.modal-backdrop) {
   font-family: var(--nav-font);
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: 8px 12px;
   font-size: 15px;
   border-radius: 8px;
   background: color-mix(in srgb, var(--default-color), transparent 92%);
   height: auto;
+  min-height: 44px;
   width: auto;
   overflow: visible;
   transition: 0.2s ease;
@@ -393,8 +441,11 @@ body.modal-open > *:not(.modal):not(.modal-backdrop) {
 }
 
 /* push main content down so the top nav doesn't overlap it */
-.header { height: 64px; }
-.header ~ .main { margin-top: 64px !important; }
+.header { height: 64px; padding-top: env(safe-area-inset-top); }
+.header ~ .main { 
+  margin-top: calc(64px + env(safe-area-inset-top)) !important; 
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
 .navmenu a:hover,
 .navmenu .active,
